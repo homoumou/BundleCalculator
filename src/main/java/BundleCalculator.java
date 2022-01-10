@@ -20,7 +20,7 @@ public class BundleCalculator {
         // get the keyArray
         int[] keyArray = getKeySet(bundleTable);
         // get the bundleKeySet
-        Set<Integer> bundleKeySet = getbundleKeySet(keyArray, postNums);
+        Set<Integer> bundleKeySet = getBundleKeySet(keyArray, postNums);
 
         Iterator  ite = bundleKeySet.iterator();
         //  the element in set is unrepeatable, then {5,5,3} => {5,3}
@@ -82,7 +82,7 @@ public class BundleCalculator {
         return keyArray;
     }
 
-    private Set<Integer> getbundleKeySet(int[] keyArray, int postNums) {
+    private Set<Integer> getBundleKeySet(int[] keyArray, int postNums) {
         Set<Integer> reverseSets = new TreeSet<>(Comparator.reverseOrder());
         for (int key: keyArray) {
             reverseSets.add(key);
