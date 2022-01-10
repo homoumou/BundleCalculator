@@ -1,4 +1,5 @@
 import java.util.*;
+import org.apache.log4j.Logger;
 
 public class BundleCalculator {
 
@@ -9,54 +10,28 @@ public class BundleCalculator {
         int remind = nums;
         double price;
         double totoalPrice = 0;
+        final Logger logger = Logger.getLogger(BundleCalculator.class);
+        final Logger savePriceLog = Logger.getLogger("savePriceLog");
 
         // create bundles table
-        Map imgTable = new HashMap();
-        imgTable.put(10,800);
-        imgTable.put(5,450);
-
-        Map audioTable = new HashMap();
-        audioTable.put(3,427.50);
-        audioTable.put(6,810);
-        audioTable.put(9,1147.50);
-
-        Map videoTable = new HashMap();
-        videoTable.put(3,570);
-        videoTable.put(5,900);
-        videoTable.put(9,1530);
-
-        Map bundleTable = new HashMap();
-
-        // select table
-        switch (formatCode){
-            case "IMG":
-                bundleTable  = imgTable;
-                break;
-            case "FLAC":
-                bundleTable = audioTable;
-                break;
-            case "VID":
-                bundleTable = videoTable;
-                break;
-        }
-
+        bundles bundles = new bundles(formatCode);
+        // get Bundle Table
+        Map bundleTable = bundles.getBundleTable();
 
 
         // get the key set
         Set keySet = bundleTable.keySet();
         Set<Integer> reverseSets = new TreeSet<>(Comparator.reverseOrder());
         Iterator  ite = keySet.iterator();
-
-        // sort the key set
+        // sort the key set (decrease)
         while(ite.hasNext()){
             reverseSets.add((Integer) ite.next());
         }
         int[] keyArray = new int[keySet.size()];
-
         Iterator sortedIte = reverseSets.iterator();
-       for (int index = 0; sortedIte.hasNext();index++){
+        for (int index = 0; sortedIte.hasNext(); index++){
            keyArray[index] = (Integer) sortedIte.next();
-       }
+        }
 
        // 17 - 9 = 8 (first_remind)   8 - 5 = 3 (secong_remind)   3-3 = 0
        // [9 , 5, 3]
@@ -94,27 +69,38 @@ public class BundleCalculator {
                 bundleNum = remind / key;
                 remind = remind - bundleNum * key;
                 price = bundleNum * Double.parseDouble(String.valueOf(bundleTable.get(key)));
-                System.out.println(bundleNum + " * " + key + " $"+price);
+                savePriceLog.info(bundleNum + " * " + key + " $"+price);
                 totoalPrice += price;
+            } else {
+                // if reminding post can`t make as bundles, find the closet bundles as compensation
+                if (remind > 0){
+                    Iterator  minIte = reverseSets.iterator();
+                    int minKey = 0;
+                    double minMargin = 9999;
+                    while(minIte.hasNext()){
+                        // 14 - 9 = 5  5-6 = -1
+                        int tempKey = (int)minIte.next();
+                        double tempMargin = remind - tempKey;
+                        if(Math.abs(minMargin) > Math.abs(tempMargin) && tempMargin<0){
+                            minKey = tempKey;
+                            minMargin = tempMargin;
+                        }
+                    }
+                    bundleNum = 1;
+                    remind = 0;
+                    price = bundleNum * Double.parseDouble(String.valueOf(bundleTable.get(minKey)));
+                    savePriceLog.info(bundleNum + " * " + key + " $"+price);
+                    totoalPrice += price;
+                }
             }
-
-            if(remind < key){
-//                // finding closest bundles
-//                int min_key = 0;
-//                int min_remind = 99;
-//                while(ite.hasNext()) {
-//                    int temp_key = (int)ite.next();
-//                    if (min_remind > (temp_key - remind) && min_remind > 0){
-//                        min_key = temp_key;
-//                        min_remind = temp_key - remind;
-//                    }
-//                }
+            if(!ite.hasNext() && (remind % key)!=0){
                 price = Double.parseDouble(String.valueOf(bundleTable.get(key)));
-                System.out.println(1 + " * " + key + " $"+price);
+                savePriceLog.info(1 + " * " + key + " $"+price);
                 totoalPrice += price;
             }
         }
-       System.out.println(nums +" "+ formatCode + " $" +totoalPrice);
+        savePriceLog.info(nums +" "+ formatCode + " $" +totoalPrice);
+
        return totoalPrice;
     }
 

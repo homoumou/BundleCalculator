@@ -36,20 +36,25 @@ public class minSubarray {
     }
 
     public static void main(String[] args) {
-        int[] nums = {3,5,9};
-        int target = 13;
+//        int[] nums = {3,5,9};
+//        int target = 13;
 
 
-        for(int j= nums.length-1; j>=0;j--){
-            int x = target-nums[j];
-            for(int i= nums.length-1; i>=0 ; i--){
-                if(x % nums[i]==0){
-                    System.out.println(nums[j]);
-                    System.out.println(nums[i]);
-                    return;
-                }
-            }
-        }
+//        for(int j= nums.length-1; j>=0;j--){
+//            int x = target-nums[j];
+//            for(int i= nums.length-1; i>=0 ; i--){
+//                if(x % nums[i]==0){
+//                    System.out.println(nums[j]);
+//                    System.out.println(nums[i]);
+//                    return;
+//                }
+//            }
+//        }
+
+        bundles bundles = new bundles("IMG");
+        Map imgTable = bundles.getBundleTable();
+        Map AudioTable = bundles.getBundleTable();
+        Map VideoTable = bundles.getBundleTable();
 
     }
 }

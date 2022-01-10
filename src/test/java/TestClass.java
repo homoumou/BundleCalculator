@@ -52,5 +52,17 @@ public class TestClass {
         assertEquals(1957.5, totoalPrice,"wrong price");
     }
 
+    @Test void Test8(){
+        BundleCalculator bundleCalculator = new BundleCalculator();
+        double totoalPrice = bundleCalculator.Calculate(14, "FLAC");
+        assertEquals(1957.5, totoalPrice,"wrong price");
+    }
+
+    @Test void Test9(){
+        BundleCalculator bundleCalculator = new BundleCalculator();
+        double totoalPrice = bundleCalculator.Calculate(12, "VID");
+        assertEquals(2100, totoalPrice,"wrong price");
+    }
+
 
 }
