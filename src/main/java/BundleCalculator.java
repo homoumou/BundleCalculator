@@ -4,10 +4,10 @@ import org.apache.log4j.Logger;
 public class BundleCalculator {
 
 
-    public double Calculate(int nums, String formatCode ){
+    public double Calculate(int postNums, String formatCode ){
         // initial
         int bundleNum;
-        int remind = nums;
+        int remind = postNums;
         double price;
         double totoalPrice = 0;
         final Logger logger = Logger.getLogger(BundleCalculator.class);
@@ -17,52 +17,13 @@ public class BundleCalculator {
         bundles bundles = new bundles(formatCode);
         // get Bundle Table
         Map bundleTable = bundles.getBundleTable();
+        // get the keyArray
+        int[] keyArray = getKeySet(bundleTable);
+        // get the bundleKeySet
+        Set<Integer> bundleKeySet = getbundleKeySet(keyArray, postNums);
 
-
-        // get the key set
-        Set keySet = bundleTable.keySet();
-        Set<Integer> reverseSets = new TreeSet<>(Comparator.reverseOrder());
-        Iterator  ite = keySet.iterator();
-        // sort the key set (decrease)
-        while(ite.hasNext()){
-            reverseSets.add((Integer) ite.next());
-        }
-        int[] keyArray = new int[keySet.size()];
-        Iterator sortedIte = reverseSets.iterator();
-        for (int index = 0; sortedIte.hasNext(); index++){
-           keyArray[index] = (Integer) sortedIte.next();
-        }
-
-       // 17 - 9 = 8 (first_remind)   8 - 5 = 3 (secong_remind)   3-3 = 0
-       // [9 , 5, 3]
-        //  13 - 9 = 4 (first_remind)
-        //  13 - 5 = 8
-        //  13 - 3 = 10
-        labe:for(int j= 0; j < keyArray.length;j++){
-            int first_remind = nums-keyArray[j];
-            for(int i= 0; i < keyArray.length; i++) {
-                if (first_remind % keyArray[i] == 0) {
-                    reverseSets.clear();
-                    reverseSets.add(keyArray[j]);
-                    reverseSets.add(keyArray[i]);
-                    break labe;
-                } else {
-                    int second_remind = first_remind - keyArray[i];
-                    for (int k = 0; k < keyArray.length; k++){
-                       if(second_remind > 0 && second_remind % keyArray[k] == 0){
-                           reverseSets.clear();
-                           reverseSets.add(keyArray[j]);
-                           reverseSets.add(keyArray[i]);
-                           reverseSets.add(keyArray[k]);
-                           break labe;
-                       }
-                    }
-                }
-            }
-        }
-
+        Iterator  ite = bundleKeySet.iterator();
         //  the element in set is unrepeatable, then {5,5,3} => {5,3}
-        ite = reverseSets.iterator();
         while(ite.hasNext()){
             int key = (int)ite.next();
             if(((remind / key) > 0)){
@@ -74,7 +35,7 @@ public class BundleCalculator {
             } else {
                 // if reminding post can`t make as bundles, find the closet bundles as compensation
                 if (remind > 0){
-                    Iterator  minIte = reverseSets.iterator();
+                    Iterator  minIte = bundleKeySet.iterator();
                     int minKey = 0;
                     double minMargin = 9999;
                     while(minIte.hasNext()){
@@ -99,10 +60,58 @@ public class BundleCalculator {
                 totoalPrice += price;
             }
         }
-        savePriceLog.info(nums +" "+ formatCode + " $" +totoalPrice);
+        savePriceLog.info(postNums +" "+ formatCode + " $" +totoalPrice);
 
        return totoalPrice;
     }
+
+
+    private int[] getKeySet(Map bundleTable){
+        Set keySet= bundleTable.keySet();
+        Set<Integer> reverseSets = new TreeSet<>(Comparator.reverseOrder());
+        Iterator ite = keySet.iterator();
+        // sort the key set (decrease)
+        while (ite.hasNext()) {
+            reverseSets.add((Integer) ite.next());
+        }
+        int[] keyArray = new int[keySet.size()];
+        Iterator sortedIte = reverseSets.iterator();
+        for (int index = 0; sortedIte.hasNext(); index++) {
+            keyArray[index] = (Integer) sortedIte.next();
+        }
+        return keyArray;
+    }
+
+    private Set<Integer> getbundleKeySet(int[] keyArray, int postNums) {
+        Set<Integer> reverseSets = new TreeSet<>(Comparator.reverseOrder());
+        for (int key: keyArray) {
+            reverseSets.add(key);
+        }
+        labe:for(int j= 0; j < keyArray.length;j++){
+            int first_remind = postNums-keyArray[j];
+            for(int i= 0; i < keyArray.length; i++) {
+                if (first_remind % keyArray[i] == 0) {
+                    reverseSets.clear();
+                    reverseSets.add(keyArray[j]);
+                    reverseSets.add(keyArray[i]);
+                    break labe;
+                } else {
+                    int second_remind = first_remind - keyArray[i];
+                    for (int k = 0; k < keyArray.length; k++){
+                        if(second_remind > 0 && second_remind % keyArray[k] == 0){
+                            reverseSets.clear();
+                            reverseSets.add(keyArray[j]);
+                            reverseSets.add(keyArray[i]);
+                            reverseSets.add(keyArray[k]);
+                            break labe;
+                        }
+                    }
+                }
+            }
+        }
+        return reverseSets;
+    }
+
 
     public static void main(String[] args) {
         BundleCalculator bundleCalculator = new BundleCalculator();
