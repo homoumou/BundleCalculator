@@ -6,8 +6,15 @@ public class BundleCalculator {
 
 
     public static void main(String[] args) {
+
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter numbers of posts");
+        int postNums = Integer.parseInt(scanner.nextLine());
+        System.out.println("Enter format code");
+        String formatCode = scanner.nextLine();
+
         BundleCalculator bundleCalculator = new BundleCalculator();
-        bundleCalculator.Calculate(14, "FLAC");
+        bundleCalculator.Calculate(postNums, formatCode);
     }
 
     public double Calculate(int postNums, String formatCode) {
