@@ -12,9 +12,13 @@ public class BundleCalculator {
         int postNums = Integer.parseInt(scanner.nextLine());
         System.out.println("Enter format code");
         String formatCode = scanner.nextLine();
-
+        Order order = new Order();
+        order.setPostNums(postNums);
+        order.setFormatCode(formatCode);;
+        Map bundleTable = order.getBundleTable();
         BundleCalculator bundleCalculator = new BundleCalculator();
         bundleCalculator.Calculate(postNums, formatCode);
+
     }
 
     public double Calculate(int postNums, String formatCode) {

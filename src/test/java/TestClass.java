@@ -8,7 +8,10 @@ public class TestClass {
     //    Input: 10 IMG
     public void test10Img(){
         BundleCalculator bundleCalculator = new BundleCalculator();
-        double totoalPrice = bundleCalculator.Calculate(10, "IMG");
+        Order order = new Order();
+        order.setPostNums(10);
+        order.setFormatCode("IMG");
+        double totoalPrice = order.Calculate();
         assertEquals(800, totoalPrice,"wrong price");
     }
 
@@ -16,7 +19,10 @@ public class TestClass {
     // Input: 15 FLAC
     public void test15Flac(){
         BundleCalculator bundleCalculator = new BundleCalculator();
-        double totoalPrice = bundleCalculator.Calculate(15, "FLAC");
+        Order order = new Order();
+        order.setPostNums(15);
+        order.setFormatCode("FLAC");
+        double totoalPrice = order.Calculate();
         assertEquals(1957.5, totoalPrice,"wrong price");
     }
 
@@ -24,7 +30,10 @@ public class TestClass {
     //Input: 13 VID
     public void test13Vid(){
         BundleCalculator bundleCalculator = new BundleCalculator();
-        double totoalPrice = bundleCalculator.Calculate(13, "VID");
+        Order order = new Order();
+        order.setPostNums(13);
+        order.setFormatCode("VID");
+        double totoalPrice = order.Calculate();
         assertEquals(2370, totoalPrice,"wrong price");
     }
 
@@ -33,7 +42,10 @@ public class TestClass {
     public void test17Vid(){
         // 17 9 5 3
         BundleCalculator bundleCalculator = new BundleCalculator();
-        double totoalPrice = bundleCalculator.Calculate(17, "VID");
+        Order order = new Order();
+        order.setPostNums(17);
+        order.setFormatCode("VID");
+        double totoalPrice = order.Calculate();
         assertEquals(3000, totoalPrice,"wrong price");
     }
 
@@ -42,29 +54,44 @@ public class TestClass {
     public void test23Vid(){
         // 23 9 9 5
         BundleCalculator bundleCalculator = new BundleCalculator();
-        double totoalPrice = bundleCalculator.Calculate(23, "VID");
+        Order order = new Order();
+        order.setPostNums(23);
+        order.setFormatCode("VID");
+        double totoalPrice = order.Calculate();
         assertEquals(3960, totoalPrice,"wrong price");
     }
 
     @Test
+    //Input: 12 IMG
     public void test12Img(){
         BundleCalculator bundleCalculator = new BundleCalculator();
-        double totoalPrice = bundleCalculator.Calculate(12, "IMG");
+        Order order = new Order();
+        order.setPostNums(12);
+        order.setFormatCode("IMG");
+        double totoalPrice = order.Calculate();
         assertEquals(1250, totoalPrice,"wrong price");
     }
 
 
     @Test
+    //Input: 14 Flac
     public void test14Flac(){
         BundleCalculator bundleCalculator = new BundleCalculator();
-        double totoalPrice = bundleCalculator.Calculate(14, "FLAC");
+        Order order = new Order();
+        order.setPostNums(14);
+        order.setFormatCode("FLAC");
+        double totoalPrice = order.Calculate();
         assertEquals(1957.5, totoalPrice,"wrong price");
     }
 
     @Test
+    //Input: 12 Vid
     public void test12Vid(){
         BundleCalculator bundleCalculator = new BundleCalculator();
-        double totoalPrice = bundleCalculator.Calculate(12, "VID");
+        Order order = new Order();
+        order.setPostNums(12);
+        order.setFormatCode("VID");
+        double totoalPrice = order.Calculate();
         assertEquals(2100, totoalPrice,"wrong price");
     }
 
