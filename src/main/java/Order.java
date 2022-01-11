@@ -16,9 +16,9 @@ public class Order {
         return bundleTable;
     }
 
-    public double Calculate() {
+    public double calculate() {
         BundleCalculator bundleCalculator = new BundleCalculator();
-        return bundleCalculator.Calculate(postNums, formatCode);
+        return bundleCalculator.calculate(postNums, formatCode);
     }
 
 }

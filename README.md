@@ -4,7 +4,7 @@ In Demo class
 
 run main method
 
-(1) Enter numbers of posts
+(1) Enter number of posts
 
 (2) Enter format code
 ## Context

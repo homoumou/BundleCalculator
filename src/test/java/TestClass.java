@@ -11,7 +11,7 @@ public class TestClass {
         Order order = new Order();
         order.setPostNums(10);
         order.setFormatCode("IMG");
-        double totoalPrice = order.Calculate();
+        double totoalPrice = order.calculate();
         assertEquals(800, totoalPrice, "wrong price");
     }
 
@@ -22,7 +22,7 @@ public class TestClass {
         Order order = new Order();
         order.setPostNums(15);
         order.setFormatCode("FLAC");
-        double totoalPrice = order.Calculate();
+        double totoalPrice = order.calculate();
         assertEquals(1957.5, totoalPrice, "wrong price");
     }
 
@@ -33,7 +33,7 @@ public class TestClass {
         Order order = new Order();
         order.setPostNums(13);
         order.setFormatCode("VID");
-        double totoalPrice = order.Calculate();
+        double totoalPrice = order.calculate();
         assertEquals(2370, totoalPrice, "wrong price");
     }
 
@@ -45,7 +45,7 @@ public class TestClass {
         Order order = new Order();
         order.setPostNums(17);
         order.setFormatCode("VID");
-        double totoalPrice = order.Calculate();
+        double totoalPrice = order.calculate();
         assertEquals(3000, totoalPrice, "wrong price");
     }
 
@@ -57,7 +57,7 @@ public class TestClass {
         Order order = new Order();
         order.setPostNums(23);
         order.setFormatCode("VID");
-        double totoalPrice = order.Calculate();
+        double totoalPrice = order.calculate();
         assertEquals(3960, totoalPrice, "wrong price");
     }
 
@@ -68,7 +68,7 @@ public class TestClass {
         Order order = new Order();
         order.setPostNums(12);
         order.setFormatCode("IMG");
-        double totoalPrice = order.Calculate();
+        double totoalPrice = order.calculate();
         assertEquals(1250, totoalPrice, "wrong price");
     }
 
@@ -80,7 +80,7 @@ public class TestClass {
         Order order = new Order();
         order.setPostNums(14);
         order.setFormatCode("FLAC");
-        double totoalPrice = order.Calculate();
+        double totoalPrice = order.calculate();
         assertEquals(1957.5, totoalPrice, "wrong price");
     }
 
@@ -91,7 +91,7 @@ public class TestClass {
         Order order = new Order();
         order.setPostNums(12);
         order.setFormatCode("VID");
-        double totoalPrice = order.Calculate();
+        double totoalPrice = order.calculate();
         assertEquals(2100, totoalPrice, "wrong price");
     }
 
