@@ -8,15 +8,15 @@ public class Order {
     private String formatCode;
     private Map bundleTable;
 
-    public Map getBundleTable(){
+    public Map getBundleTable() {
         // create bundles table
         Bundles bundles = new Bundles(formatCode);
         // get Bundle Table
         Map bundleTable = bundles.getBundleTable();
         return bundleTable;
     }
-    
-    public double Calculate(){
+
+    public double Calculate() {
         BundleCalculator bundleCalculator = new BundleCalculator();
         return bundleCalculator.Calculate(postNums, formatCode);
     }

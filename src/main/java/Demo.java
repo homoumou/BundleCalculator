@@ -11,7 +11,8 @@ public class Demo {
         String formatCode = scanner.nextLine();
         Order order = new Order();
         order.setPostNums(postNums);
-        order.setFormatCode(formatCode);;
+        order.setFormatCode(formatCode);
+        ;
         order.Calculate();
 
     }
