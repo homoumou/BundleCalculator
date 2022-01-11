@@ -4,7 +4,7 @@ import org.apache.log4j.Logger;
 
 public class BundleCalculator {
 
-    public double calculate(int postNums, String formatCode) {
+    public double getTotoalPrice(int postNums, String formatCode) {
         // initial
         int bundleNum;
         int remind = postNums;

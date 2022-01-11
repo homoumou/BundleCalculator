@@ -18,7 +18,7 @@ public class Order {
 
     public double calculate() {
         BundleCalculator bundleCalculator = new BundleCalculator();
-        return bundleCalculator.calculate(postNums, formatCode);
+        return bundleCalculator.getTotoalPrice(postNums, formatCode);
     }
 
 }
