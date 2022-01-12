@@ -12,7 +12,7 @@ public class Demo {
         Order order = new Order();
         order.setPostNums(postNums);
         order.setFormatCode(formatCode);
-        order.calculate();
+        order.getTotoalPrice();
 
     }
 }
