@@ -6,10 +6,7 @@ import lombok.*;
 @Getter
 @Setter
 public class Bundles {
-
-    private Map bundleTable;
-
-
+    private Map<Integer, Double> bundleTable;
     public Bundles(String formatCode) {
         switch (formatCode) {
             case "IMG":
@@ -34,5 +31,4 @@ public class Bundles {
                 break;
         }
     }
-
 }

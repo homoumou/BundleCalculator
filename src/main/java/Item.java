@@ -3,10 +3,20 @@ import lombok.*;
 import java.util.Map;
 
 @Data
-public class Order {
+public class Item {
     private int postNums;
     private String formatCode;
     private Map bundleTable;
+
+    public Item(){
+        this.postNums = 0;
+        this.formatCode = null;
+    }
+
+    public Item(int postNums, String formatCode) {
+        this.postNums = postNums;
+        this.formatCode = formatCode;
+    }
 
     public Map getBundleTable() {
         // create bundles table
