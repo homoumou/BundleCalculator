@@ -9,8 +9,7 @@ public class Demo {
         read.readInput(file);
         Order order = new Order();
         order.setItems(file);
-        Item[] items;
-        items = order.getItemsBundles();
+        Item[] items = order.getItemsBundles();
         write.writeOutput(items);
     }
 }
