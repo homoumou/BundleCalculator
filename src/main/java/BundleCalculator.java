@@ -4,7 +4,7 @@ import org.apache.log4j.Logger;
 
 public class BundleCalculator {
 
-    public double getTotoalPrice(int postNums, String formatCode) {
+    public ArrayList<Bundle> getBundle(int postNums, String formatCode) {
         // initial
         int bundleNum;
         int remind = postNums;
@@ -13,9 +13,11 @@ public class BundleCalculator {
         final Logger savePriceLog = Logger.getLogger("savePriceLog");
 
         // create bundles table
-        Bundles bundles = new Bundles(formatCode);
+
+        ArrayList<Bundle> bundles = new  ArrayList<Bundle>();
+        Bundle bundle = new Bundle();
         // get Bundle Table
-        Map bundleTable = bundles.getBundleTable();
+        Map bundleTable = bundle.getBundleTable(formatCode);
         // get the keyArray
         int[] keyArray = getKeySet(bundleTable);
         // get the bundleKeySet
@@ -30,7 +32,11 @@ public class BundleCalculator {
                 remind = remind - bundleNum * key;
                 price = bundleNum * Double.parseDouble(String.valueOf(bundleTable.get(key)));
                 savePriceLog.info(bundleNum + " * " + key + " $" + price);
-                System.out.println(bundleNum + " * " + key + " $" + price);
+                bundle = new Bundle();
+                bundle.setBundleNum(bundleNum);
+                bundle.setKey(key);
+                bundle.setBundlePrice(price);
+                bundles.add(bundle);
                 totoalPrice += price;
             } else {
                 // if reminding post can`t make as bundles, find the closet bundles as compensation
@@ -50,22 +56,30 @@ public class BundleCalculator {
                     bundleNum = 1;
                     remind = 0;
                     price = bundleNum * Double.parseDouble(String.valueOf(bundleTable.get(minKey)));
-                    System.out.println(bundleNum + " * " + key + " $" + price);
                     savePriceLog.info(bundleNum + " * " + key + " $" + price);
+                    bundle = new Bundle();
+                    bundle.setBundleNum(bundleNum);
+                    bundle.setKey(key);
+                    bundle.setBundlePrice(price);
+                    bundles.add(bundle);
                     totoalPrice += price;
                 }
             }
             if (!ite.hasNext() && (remind % key) != 0) {
                 price = Double.parseDouble(String.valueOf(bundleTable.get(key)));
-                System.out.println(1 + " * " + key + " $" + price);
                 savePriceLog.info(1 + " * " + key + " $" + price);
+                bundle = new Bundle();
+                bundle.setBundleNum(1);
+                bundle.setKey(key);
+                bundle.setBundlePrice(price);
+                bundles.add(bundle);
                 totoalPrice += price;
             }
         }
         savePriceLog.info(postNums + " " + formatCode + " $" + totoalPrice);
-        System.out.println(postNums + " " + formatCode + " $" + totoalPrice);
 
-        return totoalPrice;
+
+        return bundles;
     }
 
     private int[] getKeySet(Map bundleTable) {

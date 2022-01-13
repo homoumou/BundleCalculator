@@ -1,14 +1,17 @@
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.Map;
 
-@Data
+
+@Getter
+@Setter
 public class Item {
     private int postNums;
     private String formatCode;
-    private Map bundleTable;
+    private ArrayList<Bundle> bundles;
 
-    public Item(){
+    public Item() {
         this.postNums = 0;
         this.formatCode = null;
     }
@@ -18,17 +21,30 @@ public class Item {
         this.formatCode = formatCode;
     }
 
-    public Map getBundleTable() {
+    public Map<Integer, Double> getBundleTable() {
         // create bundles table
-        Bundles bundles = new Bundles(formatCode);
+        Bundle bundle = new Bundle();
         // get Bundle Table
-        Map bundleTable = bundles.getBundleTable();
+        Map bundleTable = bundle.getBundleTable(formatCode);
         return bundleTable;
     }
 
-    public double getTotoalPrice() {
+    public ArrayList<Bundle> calculateBundles() {
         BundleCalculator bundleCalculator = new BundleCalculator();
-        return bundleCalculator.getTotoalPrice(postNums, formatCode);
+        bundles = bundleCalculator.getBundle(postNums, formatCode);
+        return bundles;
     }
 
+    public double getTotoalPrice() {
+        double totoalPrice = 0;
+        for (int j = 0; j < bundles.size(); j++) {
+            Bundle bundle = (Bundle) bundles.get(j);
+            totoalPrice += bundle.getBundlePrice();
+        }
+        return totoalPrice;
+    }
 }
+
+
+
+

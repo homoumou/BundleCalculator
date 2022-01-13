@@ -1,6 +1,13 @@
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
+
+@Getter
+@Setter
 public class Order {
     Item[] items;
 
@@ -9,9 +16,26 @@ public class Order {
         this.items = read.readInput(fileSrc);
     }
 
-    void calculate (){
-        for(int i=0; i<items.length; i++){
-            items[i].getTotoalPrice();
+    double calculate() {
+        double totoalPrice = 0;
+        for (int i = 0; i < items.length; i++) {
+            totoalPrice = 0;
+            ArrayList bundles = items[i].getBundles();
+            for (int j = 0; j < bundles.size(); j++) {
+                Bundle bundle = (Bundle) bundles.get(j);
+
+                totoalPrice += bundle.getBundlePrice();
+            }
         }
+        return totoalPrice;
     }
+    Item[] getItemsBundles(){
+        for(int i=0; i<items.length; i++){
+            ArrayList<Bundle> bundles = new ArrayList();
+            items[i].setBundles(bundles);
+            items[i].calculateBundles();
+        }
+        return items;
+    }
+
 }
