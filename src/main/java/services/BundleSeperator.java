@@ -1,8 +1,15 @@
 package services;
 
+import domain.Bundle;
+import domain.Item;
+import lombok.Data;
+import org.apache.log4j.Logger;
+
 import java.util.*;
 
+@Data
 public class BundleSeperator {
+    BundleCalculator bundleCalculator = new BundleCalculator();
 
     public int[] getKeyArray(Map bundleTable) {
         Set keySet = bundleTable.keySet();
@@ -50,4 +57,48 @@ public class BundleSeperator {
         }
         return reverseSets;
     }
+
+    public ArrayList<Bundle> covertBundlesMap(ArrayList<Map> bundlesMap){
+        Bundle bundle = new Bundle();
+        ArrayList<Bundle> bundles = new  ArrayList<Bundle>();
+        for (int i=0;i<bundlesMap.size();i++){
+            bundle = new Bundle();
+            Map bundleMap = bundlesMap.get(i);
+            bundle.setBundleNum((Integer) bundleMap.get("bundleNum"));
+            bundle.setKey((Integer) bundleMap.get("key"));
+            bundle.setBundlePrice((Double) bundleMap.get("bundlePrice"));
+            bundles.add(bundle);
+        }
+        return bundles;
+    }
+
+    public ArrayList<Bundle> calculateBundle(int postNums, String formatCode) {
+        // initial
+        int bundleNum;
+        int remind = postNums;
+        double price;
+        double totoalPrice = 0;
+        final Logger savePriceLog = Logger.getLogger("savePriceLog");
+        // create bundles list
+        ArrayList<Bundle> bundles = new  ArrayList<Bundle>();
+        ArrayList<Map> bundlesMap = new ArrayList<Map>();
+
+        Map bundleMap = new HashMap();
+        Bundle bundle = new Bundle();
+        // get Bundle Table
+        Map bundleTable = bundle.getBundleTable(formatCode);
+        // get the keyArray
+        int[] keyArray = getKeyArray(bundleTable);
+        // get the bundleKeySet
+        Set<Integer> bundleKeySet = getBundleKeySet(keyArray, postNums);
+        Iterator ite = bundleKeySet.iterator();
+        bundlesMap = bundleCalculator.calculate(remind, bundleKeySet, bundleTable);
+
+        //covert bundlesMap into bundles
+        bundles = covertBundlesMap(bundlesMap);
+
+
+        return bundles;
+    }
+
 }

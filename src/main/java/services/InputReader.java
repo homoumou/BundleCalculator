@@ -1,6 +1,7 @@
+package services;
+
 import domain.Item;
 import domain.Order;
-import services.BundleCalculator;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -14,6 +15,7 @@ public class InputReader {
         final String file = fileSrc;
         Order order = new Order();
         BundleCalculator bundleCalculator = new BundleCalculator();
+        BundleSeperator bundleSeperator = new BundleSeperator();
         List<String> firstColList = new ArrayList<String>();
         List<String> secondColList = new ArrayList<String>();
 
@@ -43,7 +45,8 @@ public class InputReader {
             items[i].setFormatCode(secondColAry[i]);
         }
         order.setItems(items);
-        order.getItemsBundles(bundleCalculator);
+//        order.getItemsBundles(bundleCalculator);
+        order.getItemsBundles(bundleSeperator);
         return order;
     }
 }

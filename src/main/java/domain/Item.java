@@ -3,8 +3,10 @@ package domain;
 import lombok.Getter;
 import lombok.Setter;
 import services.BundleCalculator;
+import services.BundleSeperator;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 
 @Getter
@@ -14,15 +16,17 @@ public class Item {
     private String formatCode;
     private ArrayList<Bundle> bundles;
 
+
     public Item() {
         this.postNums = 0;
         this.formatCode = null;
     }
 
-    public ArrayList<Bundle> calculateBundles(BundleCalculator bundleCalculator) {
-        this.bundles = bundleCalculator.calculateBundle(postNums, formatCode);
+    public ArrayList<Bundle> seperateBundles(BundleSeperator bundleSeperator) {
+        this.bundles = bundleSeperator.calculateBundle(postNums, formatCode);
         return bundles;
     }
+
 
     public double getTotoalPrice() {
         double totoalPrice = 0;
