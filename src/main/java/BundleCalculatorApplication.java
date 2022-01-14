@@ -5,7 +5,7 @@ import services.OutputWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class Demo {
+public class BundleCalculatorApplication {
     public static void main(String[] args) throws IOException {
         InputReader read = new InputReader();
         OutputWriter write = new OutputWriter();
