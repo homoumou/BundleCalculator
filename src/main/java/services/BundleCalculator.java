@@ -7,11 +7,12 @@ import org.apache.log4j.Logger;
 import java.util.*;
 
 public class BundleCalculator {
+
     public ArrayList<Map> calculate(int remind, Set<Integer> bundleKeySet, Map bundleTable){
         int bundleNum;
         double price;
         Iterator ite = bundleKeySet.iterator();
-        ArrayList<Map> bundlesMap = new ArrayList<Map>();
+        ArrayList<Map> bundlesMap = new ArrayList<>();
         Map bundleMap = new HashMap();
 
         while (ite.hasNext()) {

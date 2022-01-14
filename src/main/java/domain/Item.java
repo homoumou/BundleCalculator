@@ -22,16 +22,15 @@ public class Item {
         this.formatCode = null;
     }
 
-    public ArrayList<Bundle> seperateBundles(BundleSeperator bundleSeperator) {
+    public void seperateBundles(BundleSeperator bundleSeperator) {
         this.bundles = bundleSeperator.calculateBundle(postNums, formatCode);
-        return bundles;
     }
 
 
     public double getTotoalPrice() {
         double totoalPrice = 0;
         for (int j = 0; j < bundles.size(); j++) {
-            Bundle bundle = (Bundle) bundles.get(j);
+            Bundle bundle = bundles.get(j);
             totoalPrice += bundle.getBundlePrice();
         }
         return totoalPrice;

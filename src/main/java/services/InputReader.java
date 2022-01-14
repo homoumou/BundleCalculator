@@ -16,8 +16,8 @@ public class InputReader {
         Order order = new Order();
         BundleCalculator bundleCalculator = new BundleCalculator();
         BundleSeperator bundleSeperator = new BundleSeperator();
-        List<String> firstColList = new ArrayList<String>();
-        List<String> secondColList = new ArrayList<String>();
+        List<String> firstColList = new ArrayList<>();
+        List<String> secondColList = new ArrayList<>();
 
         try {
             BufferedReader bf = new BufferedReader(new FileReader(file));
@@ -25,9 +25,9 @@ public class InputReader {
             String content = null;
 
             while((content = bf.readLine()) != null){
-                String ary[] = content.trim().split("\\s+");
-                firstColList.add(ary[0]);
-                secondColList.add(ary[1]);
+                String array[] = content.trim().split("\\s+");
+                firstColList.add(array[0]);
+                secondColList.add(array[1]);
             }
 
             bf.close();
