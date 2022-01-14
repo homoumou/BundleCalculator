@@ -8,8 +8,7 @@ import java.util.*;
 
 @Data
 public class BundleSeperator {
-
-    BundleCalculator bundleCalculator = new BundleCalculator();
+    BundleCalculator bundleCalculator;
 
     public int[] getKeyArray(Map bundleTable) {
         Set keySet = bundleTable.keySet();

@@ -23,6 +23,8 @@ public class Item {
     }
 
     public void seperateBundles(BundleSeperator bundleSeperator) {
+        BundleCalculator bundleCalculator = new BundleCalculator();
+        bundleSeperator.setBundleCalculator(bundleCalculator);
         this.bundles = bundleSeperator.calculateBundle(postNums, formatCode);
     }
 
