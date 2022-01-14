@@ -1,7 +1,10 @@
+package domain;
+
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.HashMap;
 import java.util.Map;
-
-import lombok.*;
 
 @Getter
 @Setter

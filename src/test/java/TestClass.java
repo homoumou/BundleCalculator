@@ -1,4 +1,6 @@
+import domain.Item;
 import org.junit.jupiter.api.Test;
+import services.BundleCalculator;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -11,6 +13,7 @@ public class TestClass {
         Item item = new Item();
         item.setPostNums(10);
         item.setFormatCode("IMG");
+        item.setBundles(item.calculateBundles(bundleCalculator));
         double totoalPrice = item.getTotoalPrice();
         assertEquals(800, totoalPrice, "wrong price");
     }
@@ -22,6 +25,7 @@ public class TestClass {
         Item item = new Item();
         item.setPostNums(15);
         item.setFormatCode("FLAC");
+        item.setBundles(item.calculateBundles(bundleCalculator));
         double totoalPrice = item.getTotoalPrice();
         assertEquals(1957.5, totoalPrice, "wrong price");
     }
@@ -33,6 +37,7 @@ public class TestClass {
         Item item = new Item();
         item.setPostNums(13);
         item.setFormatCode("VID");
+        item.setBundles(item.calculateBundles(bundleCalculator));
         double totoalPrice = item.getTotoalPrice();
         assertEquals(2370, totoalPrice, "wrong price");
     }
@@ -45,6 +50,7 @@ public class TestClass {
         Item item = new Item();
         item.setPostNums(17);
         item.setFormatCode("VID");
+        item.setBundles(item.calculateBundles(bundleCalculator));
         double totoalPrice = item.getTotoalPrice();
         assertEquals(3000, totoalPrice, "wrong price");
     }
@@ -57,6 +63,7 @@ public class TestClass {
         Item item = new Item();
         item.setPostNums(23);
         item.setFormatCode("VID");
+        item.setBundles(item.calculateBundles(bundleCalculator));
         double totoalPrice = item.getTotoalPrice();
         assertEquals(3960, totoalPrice, "wrong price");
     }
@@ -68,6 +75,7 @@ public class TestClass {
         Item item = new Item();
         item.setPostNums(12);
         item.setFormatCode("IMG");
+        item.setBundles(item.calculateBundles(bundleCalculator));
         double totoalPrice = item.getTotoalPrice();
         assertEquals(1250, totoalPrice, "wrong price");
     }
@@ -80,6 +88,7 @@ public class TestClass {
         Item item = new Item();
         item.setPostNums(14);
         item.setFormatCode("FLAC");
+        item.setBundles(item.calculateBundles(bundleCalculator));
         double totoalPrice = item.getTotoalPrice();
         assertEquals(1957.5, totoalPrice, "wrong price");
     }
@@ -91,6 +100,7 @@ public class TestClass {
         Item item = new Item();
         item.setPostNums(12);
         item.setFormatCode("VID");
+        item.setBundles(item.calculateBundles(bundleCalculator));
         double totoalPrice = item.getTotoalPrice();
         assertEquals(2100, totoalPrice, "wrong price");
     }

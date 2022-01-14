@@ -1,15 +1,14 @@
+import domain.Order;
+
 import java.io.IOException;
 import java.util.ArrayList;
 
 public class Demo {
     public static void main(String[] args) throws IOException {
-        ReadInput read = new ReadInput();
-        WriteOutput write = new WriteOutput();
+        InputReader read = new InputReader();
+        OutputWriter write = new OutputWriter();
         String file = "src/main/java/input.txt";
-        read.readInput(file);
-        Order order = new Order();
-        order.setItems(file);
-        Item[] items = order.getItemsBundles();
-        write.writeOutput(items);
+        Order order = read.readInput(file);
+        write.writeOutput(order);
     }
 }
